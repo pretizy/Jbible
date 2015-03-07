@@ -65,7 +65,9 @@ public class VerseModel extends Observable {
                 m.find();
                 numb= Integer.parseInt(m.group());
                if(verse==numb){
-                    verseList.add(txt);
+                   m.find();
+                   txt= txt.substring(m.end()+1);
+                    verseList.add(m.group()+". "+txt);
                }
             }
      
