@@ -23,7 +23,7 @@ import models.VerseModel;
 /*implement Observer so that the JTextArea can be updated when the Model changees
  using the observer pattern
  */
-public class BibleUI extends javax.swing.JPanel implements Observer {
+public class BibleUI extends javax.swing.JPanel {
 
     /**
      * Creates new form BibleUI
@@ -35,12 +35,11 @@ public class BibleUI extends javax.swing.JPanel implements Observer {
          */
 
         model = new ChapterModel(new BookModel(1, "old"), 1);
-        vmodel = new VerseModel(1, jTextArea1, model);
-        vmodel.addObserver(this);
         initComponents();
+        vmodel = new VerseModel(1, jTextArea1, model);
         control = new ChapterController(books1.getList(), chapters1.getModel());
         vcontrol = new VerseController(chapters1.getList(), vmodel);
-
+        vmodel.setVerse(1);
     }
 
     /**
@@ -117,18 +116,8 @@ public class BibleUI extends javax.swing.JPanel implements Observer {
     private ChapterController control;
     private VerseModel vmodel;
     private VerseController vcontrol;
-
     /*override method update of interface Observer in other to update
      the JTextArea with the updated model when notified by the model
      */
-    @Override
-    public void update(Observable o, Object arg) {
-        List list=vmodel.getVerses();
-        Iterator itr= list.iterator();
-        
-        while(itr.hasNext()){
-            jTextArea1.append(itr.next().toString());
-            jTextArea1.append("\n");
-        }
-    }
+   
 }

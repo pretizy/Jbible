@@ -7,8 +7,9 @@ package models;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Observable;
+import java.util.Random;
 import javax.swing.JTextArea;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
  */
 
 //class VerseModel extends class Observvable in other to use the Observer pattern for the JTextArea component
-public class VerseModel extends Observable {
+public class VerseModel {
 //create instance variables
     private int verse;
     private JTextArea area;
@@ -44,16 +45,24 @@ public class VerseModel extends Observable {
     //setChapter method which changes the value of the current chapter;
  public void setVerse(int verse){
      this.verse= verse;
+ /*    area.setText("");
+     area.append(" "+new Random().nextInt());
+*/
+        List list= getVerses();
+        Iterator itr= list.iterator();
+       
+        while(itr.hasNext()){
+            area.append(itr.next().toString());
+            area.append("\n");
+        } 
+    
      //using the observer pattern method setChanged confirms that the model has changed
-     setChanged();
-     
-     //using the Observer pattern inherited method notifyObservers notify the Observing views
-     notifyObservers();
  }
     
  public List getVerses(){
             //do input output stuff here with the current chapter value and return a string
             //fake data to test
+            area.setText("");
             scan= cmodel.getScan();
             Pattern p= Pattern.compile("(\\d+)");
             Matcher m;

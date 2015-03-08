@@ -24,7 +24,7 @@ public class VerseController {
         //instantiate the variables with a two argument constructor
         this.chapterjlist = list;
         this.vmodel = mod;
-
+        
         //use the chapters Jlist to change the verse model when selected
         chapterjlist.addListSelectionListener((ListSelectionEvent e) -> {
             //call the setChapter method which changes the model with the selected chapter and notifies the view

@@ -35,7 +35,7 @@ public class ChapterModel extends AbstractListModel {
             //write code to use book value to initialize the begining state of the chapter UI //
             this.chapter= chapter;
             this.book = book;
-            this.scan=new Scanner(new File("Old Testament\\"+BookModel.old[book.getIndex()][0]+".txt"));
+            this.scan=new Scanner(new File("Old Testament\\"+BookModel.old[0][0]+".txt"));
             c_count = Integer.parseInt(BookModel.old[0][1]);
             String[] chap = new String[c_count];
             for (int y = c_count - 1; y >= 0; y--) {
