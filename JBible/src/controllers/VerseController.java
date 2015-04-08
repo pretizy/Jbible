@@ -11,7 +11,6 @@ import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import models.BookModel;
 import models.ChapterModel;
-import models.Finder;
 import models.Vmodel;
 
 /**
@@ -50,5 +49,8 @@ public class VerseController {
         });
 
     }
+    
+    
 
 }
+

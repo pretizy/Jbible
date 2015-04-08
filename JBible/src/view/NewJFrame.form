@@ -179,7 +179,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="ff" green="66" red="66" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="0"/>
@@ -187,7 +187,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JList(vmodel)"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="c_control= new ChapterController(oldL, newL, o_cmodel);"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="c_control= new ChapterController(oldL, newL, o_cmodel);&#xd;&#xa;verseList.setCellRenderer(new CustomVerseList());&#xd;&#xa;"/>
             <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="vmodel= new Vmodel(o_cmodel);"/>
             <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private ChapterController c_control;&#xd;&#xa;private VerseController v_control;"/>
             <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="private Vmodel vmodel;"/>
@@ -258,7 +258,7 @@
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="setting= new Settings(this, false, jLabel2, verseList);&#xd;&#xa;setting.setVisible(false);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="setting= new Settings(this, false, jLabel2, verseList);&#xd;&#xa;setting.setVisible(false);&#xd;&#xa;voice = vm.getVoice(VOICETYPE);&#xd;&#xa;voice.allocate();"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

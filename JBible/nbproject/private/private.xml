@@ -4,9 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/pretizy/Downloads/JBiblePrototype/JBible/src/view/NewJFrame.java</file>
-            <file>file:/C:/Users/pretizy/Downloads/JBiblePrototype/JBible/src/app/bible/ui/Settings.java</file>
-            <file>file:/C:/Users/pretizy/Downloads/JBiblePrototype/JBible/src/models/Finder.java</file>
-            <file>file:/C:/Users/pretizy/Downloads/JBiblePrototype/JBible/src/controllers/VerseController.java</file>
+            <file>file:/C:/Users/pretizy/Downloads/JBiblePrototype/JBible/src/view/CustomVerseList.java</file>
+            <file>file:/C:/Users/pretizy/Downloads/JBiblePrototype/JBible/src/controllers/Finder.java</file>
         </group>
     </open-files>
 </project-private>

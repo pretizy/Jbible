@@ -5,7 +5,6 @@
  */
 package view;
 
-import app.bible.ui.Settings;
 import controllers.ChapterController;
 import controllers.VerseController;
 import java.util.List;
@@ -13,8 +12,11 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import models.BookModel;
 import models.ChapterModel;
-import models.Finder;
+import controllers.Finder;
 import models.Vmodel;
+import java.io.*;
+import com.sun.speech.freetts.*;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -53,6 +55,7 @@ public class NewJFrame extends javax.swing.JFrame {
         vmodel= new Vmodel(o_cmodel);
         verseList = new JList(vmodel);
         c_control= new ChapterController(oldL, newL, o_cmodel);
+        verseList.setCellRenderer(new CustomVerseList());
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -61,6 +64,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         setting= new Settings(this, false, jLabel2, verseList);
         setting.setVisible(false);
+        voice = vm.getVoice(VOICETYPE);
+        voice.allocate();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JBIBLE");
@@ -112,7 +117,7 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 36, 120, 281));
 
         verseList.setBackground(new java.awt.Color(255, 255, 255));
-        verseList.setForeground(new java.awt.Color(0, 0, 0));
+        verseList.setForeground(new java.awt.Color(102, 102, 255));
         jScrollPane2.setViewportView(verseList);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(338, 36, 319, 281));
@@ -152,13 +157,20 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+       Thread t= new Thread(
+        (new Runnable() {
+            public void run() {
+                voice.speak(verseList.getSelectedValue().toString());
+            }
+        }
+        ));
+       t.start();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String txt = JOptionPane.showInputDialog(this, "Type in the Search Keyewords");
         //create new Finder object
-        if (txt.equals("")) {
+        if (txt.equals("") || txt == null) {
             JOptionPane.showMessageDialog(this, "No input entered");
         } else {
             Finder find = new Finder();
@@ -166,7 +178,7 @@ public class NewJFrame extends javax.swing.JFrame {
             //check if search was found, if found then show search results
             if (list.size() > 0) {
                 vmodel.setVerse(list);
-                jLabel1.setText("Search found:  " + list.size() + " results found for " + txt);
+                jLabel1.setText("Search found:  " + list.size() + (list.size() == 1 ? " result" : " results") + " found for \"" + txt + "\"");
             } else {
                 JOptionPane.showMessageDialog(this, "No search result found");
                 jLabel1.setText("No results found");
@@ -175,7 +187,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void chap1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_chap1ValueChanged
-        
+
     }//GEN-LAST:event_chap1ValueChanged
 
     private void newLValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_newLValueChanged
@@ -184,7 +196,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_newLValueChanged
 
     private void oldLValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_oldLValueChanged
-        
+
     }//GEN-LAST:event_oldLValueChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -195,6 +207,29 @@ public class NewJFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -227,4 +262,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private ChapterController c_control;
     private VerseController v_control;
     // End of variables declaration//GEN-END:variables
+    public static String VOICETYPE = "kevin16";
+    Voice voice;
+    VoiceManager vm = VoiceManager.getInstance();
+
 }

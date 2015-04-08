@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package app.bible.ui;
+package view;
 
 import java.awt.Color;
 import java.awt.event.ItemEvent;
@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -95,7 +94,7 @@ public class Settings extends javax.swing.JDialog {
 
         jLabel4.setBackground(new java.awt.Color(51, 102, 255));
         jLabel4.setForeground(new java.awt.Color(51, 102, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/app/bible/ui/Background.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Background.jpg"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 290));
 
         pack();

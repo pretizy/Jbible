@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package controllers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import models.BookModel;
 
 /**
  *
@@ -132,11 +133,12 @@ public class Finder {
             //set the scanner to the entire bible file
             scan = new Scanner(new File("kjvdat.txt"));
             //set the regex pattern with the search string
-            Pattern p = Pattern.compile("(" + str + ")");
+            Pattern p = Pattern.compile("(" + str.toLowerCase() + ")");
             //scan through the entire verses for the search parameter
             while (scan.hasNext()) {
                 String txt = scan.nextLine();
-                Matcher m = p.matcher(txt);
+                String temp= txt.toLowerCase();
+                Matcher m = p.matcher(temp);
                 if (m.find()) {
                     //insert verses that are found into the searchlist
                     searchList.add(txt.substring(0, txt.length() - 1));

@@ -5,6 +5,7 @@
  */
 package models;
 
+import controllers.Finder;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
